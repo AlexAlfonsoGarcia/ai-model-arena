@@ -1,5 +1,5 @@
 // lib/ai/catalog.ts
-// Model Catalog - statically typed list of models available via OpenRouter (MVP)
+// Model Catalog - statically typed list of models available via direct providers (updated for PHASE 7A)
 // Only include verified data; leave unknown fields as undefined.
 
 import { Model, ModelId, ProviderId, OrganizationId, ModelCapability, ModelModality } from "./types";
@@ -109,7 +109,7 @@ export const modelCatalog: Model[] = [
     organization: "openai" as OrganizationId,
     routes: [
       {
-        providerId: "openrouter" as ProviderId,
+        providerId: "openai" as ProviderId,
       },
     ],
     capabilities: ["text"] as ModelCapability[],
@@ -125,7 +125,7 @@ export const modelCatalog: Model[] = [
     organization: "openai" as OrganizationId,
     routes: [
       {
-        providerId: "openrouter" as ProviderId,
+        providerId: "openai" as ProviderId,
       },
     ],
     capabilities: ["text"] as ModelCapability[],
@@ -167,6 +167,102 @@ export const modelCatalog: Model[] = [
     pricing: undefined,
     availability: undefined,
   },
+  {
+    id: "anthropic/claude-3-opus-20240229" as ModelId,
+    displayName: "Claude 3 Opus",
+    organization: "anthropic" as OrganizationId,
+    routes: [
+      {
+        providerId: "anthropic" as ProviderId,
+      },
+    ],
+    capabilities: ["text"] as ModelCapability[],
+    modalities: ["text"] as ModelModality[],
+    // contextWindow, pricing, availability: unknown
+    contextWindow: undefined,
+    pricing: undefined,
+    availability: undefined,
+  },
+  {
+    id: "anthropic/claude-3-sonnet-20240229" as ModelId,
+    displayName: "Claude 3 Sonnet",
+    organization: "anthropic" as OrganizationId,
+    routes: [
+      {
+        providerId: "anthropic" as ProviderId,
+      },
+    ],
+    capabilities: ["text"] as ModelCapability[],
+    modalities: ["text"] as ModelModality[],
+    // contextWindow, pricing, availability: unknown
+    contextWindow: undefined,
+    pricing: undefined,
+    availability: undefined,
+  },
+  {
+    id: "anthropic/claude-3-haiku-20240307" as ModelId,
+    displayName: "Claude 3 Haiku",
+    organization: "anthropic" as OrganizationId,
+    routes: [
+      {
+        providerId: "anthropic" as ProviderId,
+      },
+    ],
+    capabilities: ["text"] as ModelCapability[],
+    modalities: ["text"] as ModelModality[],
+    // contextWindow, pricing, availability: unknown
+    contextWindow: undefined,
+    pricing: undefined,
+    availability: undefined,
+  },
+  {
+    id: "google/gemini-1.5-pro" as ModelId,
+    displayName: "Gemini 1.5 Pro",
+    organization: "google" as OrganizationId,
+    routes: [
+      {
+        providerId: "google" as ProviderId,
+      },
+    ],
+    capabilities: ["text"] as ModelCapability[],
+    modalities: ["text"] as ModelModality[],
+    // contextWindow, pricing, availability: unknown
+    contextWindow: undefined,
+    pricing: undefined,
+    availability: undefined,
+  },
+  {
+    id: "google/gemini-1.5-flash" as ModelId,
+    displayName: "Gemini 1.5 Flash",
+    organization: "google" as OrganizationId,
+    routes: [
+      {
+        providerId: "google" as ProviderId,
+      },
+    ],
+    capabilities: ["text"] as ModelCapability[],
+    modalities: ["text"] as ModelModality[],
+    // contextWindow, pricing, availability: unknown
+    contextWindow: undefined,
+    pricing: undefined,
+    availability: undefined,
+  },
+  {
+    id: "google/gemini-pro" as ModelId,
+    displayName: "Gemini Pro",
+    organization: "google" as OrganizationId,
+    routes: [
+      {
+        providerId: "google" as ProviderId,
+      },
+    ],
+    capabilities: ["text"] as ModelCapability[],
+    modalities: ["text"] as ModelModality[],
+    // contextWindow, pricing, availability: unknown
+    contextWindow: undefined,
+    pricing: undefined,
+    availability: undefined,
+  },
 ];
 
 /**
@@ -189,4 +285,18 @@ export function getOpenRouterModelName(modelId: ModelId): string | undefined {
   if (!route) return undefined;
   // If we had a providerModelName field we'd use it; for MVP we don't store it separately.
   return model.id; // assumes the model ID is the OpenRouter model name
+}
+
+/**
+ * Get the model name to use when calling the provider API.
+ * If the model has a route with a providerModelName override, use that;
+ * otherwise fall back to the model's id.
+ */
+export function getProviderModelName(modelId: ModelId, providerId: ProviderId): string | undefined {
+  const model = getModelById(modelId);
+  if (!model) return undefined;
+  const route = model.routes.find(r => r.providerId === providerId);
+  if (!route) return undefined;
+  // If we had a providerModelName field we'd use it; for MVP we don't store it separately.
+  return model.id; // assumes the model ID is the provider's model name
 }

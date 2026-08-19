@@ -13,6 +13,12 @@ describe('Model Catalog', () => {
     'openai/gpt-oss-20b',
     'moonshotai/kimi-k2.6',
     'nvidia/llama-3.3-nemotron-super-49b-v1.5',
+    'anthropic/claude-3-opus-20240229',
+    'anthropic/claude-3-sonnet-20240229',
+    'anthropic/claude-3-haiku-20240307',
+    'google/gemini-1.5-pro',
+    'google/gemini-1.5-flash',
+    'google/gemini-pro',
   ];
 
   test('catalog contains all expected models', () => {
@@ -21,14 +27,12 @@ describe('Model Catalog', () => {
     expect(ids.length).toBe(expectedModels.length);
   });
 
-  test('each model has correct organization and at least one OpenRouter route', () => {
+  test('each model has correct organization and at least one route', () => {
     for (const model of modelCatalog) {
       expect(model.organization).toBeDefined();
       expect(model.organization.length).toBeGreaterThan(0);
       expect(model.routes).toBeInstanceOf(Array);
       expect(model.routes.length).toBeGreaterThan(0);
-      const openrouterRoute = model.routes.find(r => r.providerId === 'openrouter');
-      expect(openrouterRoute).toBeDefined();
       // Ensure capabilities and modalities are arrays
       expect(Array.isArray(model.capabilities)).toBe(true);
       expect(Array.isArray(model.modalities)).toBe(true);
