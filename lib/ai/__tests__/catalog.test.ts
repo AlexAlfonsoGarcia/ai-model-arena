@@ -61,4 +61,21 @@ describe('Model Catalog', () => {
   test('getOpenRouterModelName returns undefined for unknown model', () => {
     expect(getOpenRouterModelName('unknown/unknown')).toBeUndefined();
   });
+
+  test('models have valid pricing structure when present', () => {
+    const modelsWithPricing = modelCatalog.filter(model => model.pricing !== undefined);
+    expect(modelsWithPricing.length).toBeGreaterThan(0);
+
+    for (const model of modelsWithPricing) {
+      expect(model.pricing).toBeDefined();
+      expect(model.pricing.inputPerMillionTokens).toBeGreaterThanOrEqual(0);
+      expect(model.pricing.outputPerMillionTokens).toBeGreaterThanOrEqual(0);
+      expect(typeof model.pricing.inputPerMillionTokens).toBe('number');
+      expect(typeof model.pricing.outputPerMillionTokens).toBe('number');
+      expect(!isNaN(model.pricing.inputPerMillionTokens)).toBe(true);
+      expect(!isNaN(model.pricing.outputPerMillionTokens)).toBe(true);
+      expect(!isFinite(model.pricing.inputPerMillionTokens)).toBe(false);
+      expect(!isFinite(model.pricing.outputPerMillionTokens)).toBe(false);
+    }
+  });
 });

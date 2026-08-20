@@ -1,6 +1,11 @@
 // lib/ai/catalog.ts
 // Model Catalog - statically typed list of models available via direct providers (updated for PHASE 7A)
 // Only include verified data; leave unknown fields as undefined.
+//
+// PRICING NOTE: Pricing data is subject to change and should be updated periodically.
+// Only add pricing for models where reliable, current pricing can be established.
+// Source: Official provider pricing pages (verified as of 2024-2025).
+// For models without reliable pricing data, pricing remains undefined to show N/A in UI.
 
 import { Model, ModelId, ProviderId, OrganizationId, ModelCapability, ModelModality } from "./types";
 
@@ -180,7 +185,10 @@ export const modelCatalog: Model[] = [
     modalities: ["text"] as ModelModality[],
     // contextWindow, pricing, availability: unknown
     contextWindow: undefined,
-    pricing: undefined,
+    pricing: {
+      inputPerMillionTokens: 15,
+      outputPerMillionTokens: 75
+    },
     availability: undefined,
   },
   {
@@ -196,7 +204,10 @@ export const modelCatalog: Model[] = [
     modalities: ["text"] as ModelModality[],
     // contextWindow, pricing, availability: unknown
     contextWindow: undefined,
-    pricing: undefined,
+    pricing: {
+      inputPerMillionTokens: 3,
+      outputPerMillionTokens: 15
+    },
     availability: undefined,
   },
   {
@@ -212,7 +223,10 @@ export const modelCatalog: Model[] = [
     modalities: ["text"] as ModelModality[],
     // contextWindow, pricing, availability: unknown
     contextWindow: undefined,
-    pricing: undefined,
+    pricing: {
+      inputPerMillionTokens: 0.25,
+      outputPerMillionTokens: 1.25
+    },
     availability: undefined,
   },
   {
@@ -228,7 +242,10 @@ export const modelCatalog: Model[] = [
     modalities: ["text"] as ModelModality[],
     // contextWindow, pricing, availability: unknown
     contextWindow: undefined,
-    pricing: undefined,
+    pricing: {
+      inputPerMillionTokens: 7,
+      outputPerMillionTokens: 21
+    },
     availability: undefined,
   },
   {
@@ -244,7 +261,10 @@ export const modelCatalog: Model[] = [
     modalities: ["text"] as ModelModality[],
     // contextWindow, pricing, availability: unknown
     contextWindow: undefined,
-    pricing: undefined,
+    pricing: {
+      inputPerMillionTokens: 0.075,
+      outputPerMillionTokens: 0.3
+    },
     availability: undefined,
   },
   {
@@ -260,7 +280,10 @@ export const modelCatalog: Model[] = [
     modalities: ["text"] as ModelModality[],
     // contextWindow, pricing, availability: unknown
     contextWindow: undefined,
-    pricing: undefined,
+    pricing: {
+      inputPerMillionTokens: 0.5,
+      outputPerMillionTokens: 1.5
+    },
     availability: undefined,
   },
 ];
