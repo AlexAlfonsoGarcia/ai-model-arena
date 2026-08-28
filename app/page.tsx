@@ -91,22 +91,24 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-zinc-950 flex flex-col">
-      {/* Header */}
+      {/* Enhanced Header */}
       <header className="bg-white dark:bg-zinc-900 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-100">
-            AI Model Arena
-          </h1>
-          <p className="mt-1 text-sm text-zinc-600 dark:text-zinc-300">
-            Compare responses from different AI models side-by-side
-          </p>
+        <div className="max-w-7xl mx-auto px-6 py-6">
+          <div className="flex flex-col items-center gap-3">
+            <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-100">
+              AI Model Arena
+            </h1>
+            <p className="text-base text-zinc-600 dark:text-zinc-300">
+              Compare responses from different AI models side-by-side
+            </p>
+          </div>
         </div>
       </header>
 
       {/* Main Content */}
       <main className="flex-1 max-w-7xl mx-auto px-6 py-8">
         {/* Form */}
-        <form onSubmit={(e) => e.preventDefault()} className="space-y-6">
+        <form onSubmit={(e) => e.preventDefault()} className="space-y-8">
           {/* Prompt Input */}
           <PromptInput
             value={prompt}
@@ -122,21 +124,23 @@ export default function Home() {
           />
 
           {/* Compare Button */}
-          <CompareButton
-            isLoading={isComparing}
-            onClick={handleCompareClick}
-            disabled={prompt.trim() === '' || selectedModelIds.length === 0 || selectedModelIds.length > 3}
-          >
-            {isComparing ? 'Comparing...' : 'Compare Models'}
-          </CompareButton>
+          <div className="flex justify-center">
+            <CompareButton
+              isLoading={isComparing}
+              onClick={handleCompareClick}
+              disabled={prompt.trim() === '' || selectedModelIds.length === 0 || selectedModelIds.length > 3}
+            >
+              {isComparing ? 'Comparing...' : 'Compare Models'}
+            </CompareButton>
+          </div>
 
           {/* Global Error Message (for non-field errors) */}
           {error && !error.includes('prompt') && !error.includes('model') && (
-            <div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-800 rounded-lg p-4">
+            <div className="bg-red-50 dark:bg-red-900 border border-red-200 dark:border-red-800 rounded-lg p-6">
               <p className="text-sm font-medium text-red-800 dark:text-red-200">
                 Error:
               </p>
-              <p className="mt-1 text-xs text-red-700 dark:text-red-300 break-words">
+              <p className="mt-2 text-base text-red-700 dark:text-red-300 break-words">
                 {error}
               </p>
             </div>
@@ -145,8 +149,8 @@ export default function Home() {
 
         {/* Results Section */}
         {results.length > 0 || isComparing || error && !error.includes('prompt') && !error.includes('model') && (
-          <section className="mt-8">
-            <h2 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
+          <section className="mt-10">
+            <h2 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 mb-6">
               Comparison Results
             </h2>
             <ComparisonResults
@@ -158,9 +162,9 @@ export default function Home() {
         )}
       </main>
 
-      {/* Footer */}
+      {/* Enhanced Footer */}
       <footer className="bg-white dark:bg-zinc-900 shadow-sm">
-        <div className="max-w-7xl mx-auto px-6 py-4 text-center text-sm text-zinc-500 dark:text-zinc-400">
+        <div className="max-w-7xl mx-auto px-6 py-6 text-center text-sm text-zinc-500 dark:text-zinc-400">
           Built with Next.js & Vercel AI SDK • Frontend MVP
         </div>
       </footer>
