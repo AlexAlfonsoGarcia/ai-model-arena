@@ -390,7 +390,7 @@ describe("ComparisonOrchestrator", () => {
                 finishReason: undefined,
                 error: undefined,
               });
-            }, 15); // 15ms delay
+            }, 20); // 20ms delay to account for timing variance
           });
         }),
       };

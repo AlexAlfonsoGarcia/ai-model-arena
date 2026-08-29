@@ -6,5 +6,6 @@ export default defineConfig({
     globals: true,
     environment: 'node',
     include: ['**/__tests__/**/*.{test,spec}.{ts,tsx}', '**/*.test.{ts,tsx}'],
+    setupFiles: ['./vitest.setup.js'],
   },
 });

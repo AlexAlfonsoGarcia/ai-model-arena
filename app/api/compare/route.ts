@@ -1,6 +1,7 @@
 // app/api/compare/route.ts
 // Comparison API Route - exposes the ComparisonOrchestrator through a REST endpoint
-import { NextRequest, NextResponse } from 'next/server';
+import { NextRequest } from 'next/dist/server/web/spec-extension/request';
+import { NextResponse } from 'next/dist/server/web/spec-extension/response';
 import { comparisonOrchestrator } from '../../../lib/ai/orchestrator';
 import { GenerateRequest, ModelId } from '../../../lib/ai/types';
 import { getModelById } from '../../../lib/ai/catalog';

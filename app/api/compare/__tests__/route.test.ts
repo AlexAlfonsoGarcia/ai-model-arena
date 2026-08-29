@@ -586,10 +586,6 @@ describe('Security Features', () => {
     const { POST: testPost } = routeModule;
 
     const ip = '192.168.1.4';
-    const baseRequest = mockRequest({
-      prompt: 'Test prompt',
-      modelIds: ['deepseek-ai/deepseek-v4-pro']
-    }, ip);
 
     // Send many invalid requests (should not consume quota)
     const invalidRequests = [
