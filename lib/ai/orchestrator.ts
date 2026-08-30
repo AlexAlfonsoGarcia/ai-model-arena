@@ -90,7 +90,16 @@ export class ComparisonOrchestrator {
       } catch (err) {
         // Provider execution failed (network error, API error, etc.)
         const latencyMs = Date.now() - startTime;
-        const errorMessage = err instanceof Error ? err.message : String(err);
+        let errorMessage = 'Unknown error';
+        // If the error is an AIError (from our providers), it will have a message string
+        if (err && typeof err === 'object' && 'message' in err && typeof err.message === 'string') {
+          errorMessage = err.message;
+        } else if (err instanceof Error) {
+          errorMessage = err.message;
+        } else {
+          // For any other error, we use a generic message to avoid leaking internal structure
+          errorMessage = 'Internal error';
+        }
         return {
           ...this.createErrorResponse(
             provider.id,
