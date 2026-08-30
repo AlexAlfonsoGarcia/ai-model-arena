@@ -3,6 +3,28 @@
 import { AIProvider, GenerateRequest, AIResponse, ModelId, Model, ProviderId } from "./types";
 import { ProviderRegistry, providerRegistry } from "./registry";
 import { getModelById, modelCatalog } from "./catalog";
+// Import provider instances to register them with the registry
+import { openRouterProvider } from "./providers/openrouter";
+import { openAIProvider } from "./providers/openai";
+import { anthropicProvider } from "./providers/anthropic";
+import { googleProvider } from "./providers/google";
+
+/**
+ * Register providers with the registry if not already registered.
+ * This ensures providers are available when the orchestrator resolves them.
+ */
+if (!providerRegistry.has(openRouterProvider.id)) {
+  providerRegistry.register(openRouterProvider);
+}
+if (!providerRegistry.has(openAIProvider.id)) {
+  providerRegistry.register(openAIProvider);
+}
+if (!providerRegistry.has(anthropicProvider.id)) {
+  providerRegistry.register(anthropicProvider);
+}
+if (!providerRegistry.has(googleProvider.id)) {
+  providerRegistry.register(googleProvider);
+}
 
 /**
  * Orchestrates comparisons across multiple AI providers.
