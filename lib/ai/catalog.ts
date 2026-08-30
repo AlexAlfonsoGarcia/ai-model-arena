@@ -286,6 +286,22 @@ export const modelCatalog: Model[] = [
     },
     availability: undefined,
   },
+  {
+    id: "openai/gpt-3.5-turbo" as ModelId,
+    displayName: "GPT 3.5 Turbo",
+    organization: "openai" as OrganizationId,
+    routes: [
+      {
+        providerId: "openrouter" as ProviderId,
+      },
+    ],
+    capabilities: ["text"] as ModelCapability[],
+    modalities: ["text"] as ModelModality[],
+    // contextWindow, pricing, availability: unknown
+    contextWindow: undefined,
+    pricing: undefined,
+    availability: undefined,
+  },
 ];
 
 /**

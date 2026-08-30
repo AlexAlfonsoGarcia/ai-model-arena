@@ -15,6 +15,8 @@ export class OpenRouterProvider implements AIProvider {
 
     // Get the model name for OpenRouter API from catalog
     const modelName = getOpenRouterModelName(request.modelId);
+    // For debugging: log the modelName (remove in production)
+    console.log(`OpenRouter modelName: ${modelName}`);
 
     // Prepare the request body
     const requestBody: Record<string, unknown> = {
