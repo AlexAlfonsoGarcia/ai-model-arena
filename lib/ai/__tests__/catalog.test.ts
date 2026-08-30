@@ -19,6 +19,7 @@ describe('Model Catalog', () => {
     'google/gemini-1.5-pro',
     'google/gemini-1.5-flash',
     'google/gemini-pro',
+    'openai/gpt-3.5-turbo',
   ];
 
   test('catalog contains all expected models', () => {
